@@ -1,5 +1,6 @@
 package com.example.android1.view
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,9 +23,40 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.android1.model.Asset
+
 
 @Composable
-fun AssetRow() {
+fun AssetsList() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.onBackground)
+    ) {
+        AssetRow(
+            Asset(
+                id = "1",
+                name = "Bitcon",
+                symbol = "btc",
+                price = 65000.00,
+                percentage = 13.4
+            )
+        )
+        Divider()
+        AssetRow(
+            Asset(
+                id = "2",
+                name = "Etherum",
+                symbol = "eth",
+                price = 3500.00,
+                percentage = -1.4
+            )
+        )
+    }
+}
+
+@Composable
+fun AssetRow(asset: Asset) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -31,33 +64,43 @@ fun AssetRow() {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            imageVector = Icons.Default.AccountCircle, contentDescription = null,
-            modifier = Modifier
-                .padding(horizontal = 8.dp)
-                .size(30.dp)
-        )
+        // https://assets.coincap.io/assets/icons/btc@2x.png
+
+
+       // Icon(
+       //     imageVector = Icons.Default.AccountCircle, contentDescription = null,
+        //    tint = Color.White,
+         //   modifier = Modifier
+        //        .padding(horizontal = 8.dp)
+        //        .size(30.dp)
+      //  )
+
+
         Column(
 
         ) {
             Text(
-                text = "bitcoin",
-                fontSize = 16.sp
+                text = asset.name,
+                fontSize = 16.sp,
+                color = Color.White
             )
             Text(
-                text = "BTC",
-                fontSize = 14.sp
+                text = asset.symbol,
+                fontSize = 14.sp,
+                color = Color.Gray
             )
         }
         Spacer(modifier = Modifier.weight(1f))
         Text(
-            text = "$1000",
+            text = "$${asset.price}",
             fontSize = 16.sp,
-            modifier = Modifier.padding(horizontal = 8.dp)
+            modifier = Modifier.padding(horizontal = 8.dp),
+            color = Color.White
         )
         Text(
-            text = "+30%",
+            text = "${asset.percentage}%",
             fontSize = 14.sp,
+            color = if (asset.percentage >= 0) Color.Green else Color.Red,
             modifier = Modifier.padding(horizontal = 8.dp)
         )
     }
@@ -66,16 +109,5 @@ fun AssetRow() {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 private fun AssetRowPreview() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(14.dp)
-    ) {
-        AssetRow()
-        Divider()
-        AssetRow()
-        Divider()
-        AssetRow()
-
-    }
+    AssetsList()
 }
