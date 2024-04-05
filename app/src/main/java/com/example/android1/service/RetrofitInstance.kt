@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object  RetrofitInstance {
 
-    private val BASE_URL="https://40e40850-1e51-4c1c-ad44-c633c3dfe05e.mock.pstmn.io/v2/"
+    private val BASE_URL = "https://40e40850-1e51-4c1c-ad44-c633c3dfe05e.mock.pstmn.io/v2/"
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
@@ -14,7 +14,7 @@ object  RetrofitInstance {
             .build()
     }
 
-    val AssetsService : AssetsService by lazy {
+    val assetsService: AssetsService by lazy {
         retrofit.create(AssetsService::class.java)
     }
 }
