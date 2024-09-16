@@ -61,8 +61,8 @@ fun AssetRow(asset: Asset) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+       // horizontalArrangement = Arrangement.SpaceBetween,
+       // verticalAlignment = Alignment.CenterVertically
     ) {
         // https://assets.coincap.io/assets/icons/btc@2x.png
 
@@ -74,7 +74,24 @@ fun AssetRow(asset: Asset) {
         //        .padding(horizontal = 8.dp)
         //        .size(30.dp)
       //  )
-
+         //https://assets.coincap.io/assets/icons/btc@2x.png
+    Box(modifier = Modifier.padding(horizontal = 8.dp)) {
+        if (LocalInspectionMode.current) {
+            Icon(
+                imageVector = Icons.Filled.AccountCircle,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .size(30.dp)
+            )
+        } else {
+            AsyncImage(
+                model = "https://assets.coincap.io/assets/icons/${asset.symbol.lowercase()}@2x.png",
+                contentDescription = null
+            )
+        }
+    }
 
         Column(
 
